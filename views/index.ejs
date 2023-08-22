@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Usando IO Socket</h1>
+   <!-- <button id="clicked">click me</button> -->
+
+    <button id="ligar_red">LIGAR RED</button> 
+    <button id="desligar_red">DESLIGAR RED</button> 
+
+    <div id="updates"></div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+        var socket = io();
+        //Localiza o botão
+        // var button = document.getElementById('clicked');
+
+        var buttonLigar_RED = document.getElementById('ligar_red');
+
+        var buttonDesligar_RED = document.getElementById('desligar_red');
+
+
+        //Evento do botão, envia a mensagem para o servidor em um
+        //Pacote chamado pagWEBButton,
+        //Botao com ID=Clicked
+        // button.onclick = function(e){
+        //     socket.emit('pagWEBButton', 'clicked');
+        // }
+
+        buttonLigar_RED.onclick = function(e){
+            socket.emit('True_RED', 'ligar_red');
+        }
+
+        buttonDesligar_RED.onclick = function(e){
+            socket.emit('False_RED', 'ligar_red');
+        }
+
+        //Recebe o pacote do servidor EXEMPLO e imprime na tela
+        socket.on('exemplo', function(msg){
+            document.getElementById('updates').innerHTML = msg;
+        });
+
+    </script>
+
+</body>
+</html>

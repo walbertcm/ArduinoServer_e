@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Arduino Data</h1>
+    <p id="resultado"></p>
+    <p id="mensagem">Aperte o botão no arduino para mudar de cor do retangulo</p>
+
+
+    <svg width="120" height="120" viewBox="0 0 120 120">
+        <rect id="change-color" fill="black" width="120" height="120" />
+    </svg>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+
+        var socket = io();
+        let varCurrent = 0;
+        let shape = document.getElementById('change-color');
+
+        socket.on("data", function(data){
+            let data1 = Number(data);
+            //document.getElementById('resultado').innerHTML = typeof data;
+            if(data1 == 0){
+                shape.style.fill='black';
+            }else{
+                shape.style.fill='LightSkyBlue';
+            }
+          
+        });
+
+    </script>
+
+</body>
+</html>
